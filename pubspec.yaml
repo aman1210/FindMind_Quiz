@@ -24,8 +24,10 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: 1.0.3
+  cloud_firestore: ^1.0.5
   percent_indicator: ^3.0.1
   font_awesome_flutter: ^9.0.0
+  circular_countdown_timer: ^0.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
