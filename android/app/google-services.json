@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "947483159633",
+    "project_id": "findmind-task",
+    "storage_bucket": "findmind-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947483159633:android:fb72b334398eb303e15c70",
+        "android_client_info": {
+          "package_name": "com.example.findmind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947483159633-oq4v13m4ica5qehaanflq8pdldtkvopc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAwrjw-PHw6sE5ouQaF0fV8dtV5zyKVAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947483159633-oq4v13m4ica5qehaanflq8pdldtkvopc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

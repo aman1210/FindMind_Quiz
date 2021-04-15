@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.findmind_task">
+    package="com.example.findmind">
    <application
-        android:label="findmind_task"
+        android:label="findmind"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

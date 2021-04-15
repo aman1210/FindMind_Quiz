@@ -16,7 +16,7 @@ class QuizScreen extends StatelessWidget {
 
     double topWidgetHeight = s.height * 0.35;
 
-    double bottomWidgetHeight = s.height - topWidgetHeight;
+    double bottomWidgetHeight = s.height - topWidgetHeight - 150.0;
 
     const radius = 20.0;
 
@@ -91,6 +91,21 @@ class QuizScreen extends StatelessWidget {
             isCorrectProgess: false),
       ],
     );
+    var question = Expanded(
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Text(
+            'How many students in your class __ from Korea?',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ),
+    );
     return Scaffold(
       body: Container(
         height: s.height,
@@ -98,11 +113,6 @@ class QuizScreen extends StatelessWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            Positioned(
-              bottom: 0,
-              child:
-                  OptionContainer(bottomWidgetHeight: bottomWidgetHeight, s: s),
-            ),
             BackGround(topWidgetHeight: topWidgetHeight, s: s, radius: radius),
             CustomAppBar(s: s),
             Positioned(
@@ -133,21 +143,17 @@ class QuizScreen extends StatelessWidget {
                       height: 25,
                     ),
                     questionNumber,
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 30,
-                        horizontal: 20,
-                      ),
-                      child: Text(
-                        'How many students in your class __ from Korea?',
-                        textAlign: TextAlign.center,
-                      ),
-                    )
+                    question,
                   ],
                 ),
               ),
             ),
             timerWidget,
+            Positioned(
+              bottom: 0,
+              child:
+                  OptionContainer(bottomWidgetHeight: bottomWidgetHeight, s: s),
+            ),
           ],
         ),
       ),
