@@ -1,4 +1,5 @@
 import 'package:findmind_task/screens/quizScreen.dart';
+import 'package:findmind_task/screens/scoreScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         future: _initialization,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return QuizScreen();
+            // return QuizScreen();
+            return ScoreScreen();
           }
           return Center(
             child: CircularProgressIndicator(),

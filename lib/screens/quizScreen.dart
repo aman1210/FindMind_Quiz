@@ -69,17 +69,14 @@ class _QuizScreenState extends State<QuizScreen> {
               s: s,
             ),
             QuizTimer(topWidgetHeight, s, TimesUp, answerSelected, controller),
-            Positioned(
-              bottom: 0,
-              child: OptionContainer(
-                bottomWidgetHeight: bottomWidgetHeight,
-                s: s,
-                showAns: isTimesUp,
-                answerMarker: AnswerMarker,
-                selected: selected,
-                correct: correct,
-                isAnswerSelected: answerSelected,
-              ),
+            OptionContainer(
+              bottomWidgetHeight: bottomWidgetHeight,
+              s: s,
+              showAns: isTimesUp,
+              answerMarker: AnswerMarker,
+              selected: selected,
+              correct: correct,
+              isAnswerSelected: answerSelected,
             ),
             if (isTimesUp || answerSelected)
               Positioned(
