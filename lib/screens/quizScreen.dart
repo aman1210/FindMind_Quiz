@@ -83,12 +83,14 @@ class QuizScreen extends StatelessWidget {
             progressNumber: 05,
             percent: 5 / 20,
             color: Colors.green,
-            isCorrectProgess: true),
+            isCorrectProgess: true,
+            width: (s.width - 200) / 2),
         progressIndicator(
             progressNumber: 07,
             percent: 7 / 20,
             color: Colors.red,
-            isCorrectProgess: false),
+            isCorrectProgess: false,
+            width: (s.width - 200) / 2),
       ],
     );
     var question = Expanded(
@@ -164,7 +166,8 @@ class QuizScreen extends StatelessWidget {
       {int progressNumber,
       double percent,
       Color color,
-      bool isCorrectProgess}) {
+      bool isCorrectProgess,
+      double width}) {
     var text = Text(
       '$progressNumber',
       style: TextStyle(color: color, fontWeight: FontWeight.bold),
@@ -173,7 +176,7 @@ class QuizScreen extends StatelessWidget {
       progressColor: color,
       percent: percent,
       backgroundColor: Colors.white,
-      width: 100,
+      width: width,
       lineHeight: 8,
       animation: true,
     );
