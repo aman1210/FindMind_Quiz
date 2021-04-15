@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:findmind_task/widgets/question.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +16,33 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   bool isTimesUp = false;
+  bool answerSelected = false;
+  bool resetTimer = true;
+  int selected = -1;
+  int correct = 3;
+  CountDownController controller = CountDownController();
 
   void TimesUp() {
     setState(() {
       isTimesUp = true;
+    });
+  }
+
+  void AnswerMarker(int val) {
+    setState(() {
+      controller.pause();
+      selected = val;
+      answerSelected = true;
+    });
+  }
+
+  void NextQuestion() {
+    setState(() {
+      controller.restart();
+      selected = -1;
+      isTimesUp = false;
+      answerSelected = false;
+      resetTimer = true;
     });
   }
 
@@ -44,33 +68,38 @@ class _QuizScreenState extends State<QuizScreen> {
               topWidgetHeight: topWidgetHeight,
               s: s,
             ),
-            QuizTimer(topWidgetHeight, s, TimesUp),
+            QuizTimer(topWidgetHeight, s, TimesUp, answerSelected, controller),
             Positioned(
               bottom: 0,
               child: OptionContainer(
                 bottomWidgetHeight: bottomWidgetHeight,
                 s: s,
                 showAns: isTimesUp,
+                answerMarker: AnswerMarker,
+                selected: selected,
+                correct: correct,
+                isAnswerSelected: answerSelected,
               ),
             ),
-            Positioned(
-              bottom: 15,
-              right: 15,
-              child: Align(
-                child: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.amber),
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_right,
-                        size: 30,
-                      ),
-                      onPressed: () {}),
+            if (isTimesUp || answerSelected)
+              Positioned(
+                bottom: 15,
+                right: 15,
+                child: Align(
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.amber),
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.arrow_right,
+                          size: 30,
+                        ),
+                        onPressed: NextQuestion),
+                  ),
                 ),
               ),
-            ),
           ],
         ),
       ),
