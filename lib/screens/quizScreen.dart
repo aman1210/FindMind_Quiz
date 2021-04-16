@@ -1,17 +1,17 @@
 import 'dart:ui';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:findmind_task/model/questionModel.dart';
-import 'package:findmind_task/provider/quizProvider.dart';
-import 'package:findmind_task/screens/scoreScreen.dart';
-import 'package:findmind_task/widgets/question.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:findmind_task/widgets/timer.dart';
 import 'package:findmind_task/widgets/background.dart';
 import 'package:findmind_task/widgets/customAppBar.dart';
 import 'package:findmind_task/widgets/optionsContainer.dart';
-import 'package:provider/provider.dart';
+import 'package:findmind_task/model/questionModel.dart';
+import 'package:findmind_task/provider/quizProvider.dart';
+import 'package:findmind_task/screens/scoreScreen.dart';
+import 'package:findmind_task/widgets/question.dart';
 
 class QuizScreen extends StatefulWidget {
   @override

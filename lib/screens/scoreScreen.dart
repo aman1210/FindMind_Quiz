@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:findmind_task/provider/quizProvider.dart';
 import 'package:findmind_task/widgets/background.dart';
 import 'package:findmind_task/widgets/customAppBar.dart';
 import 'package:findmind_task/widgets/scoreBubble.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 class ScoreScreen extends StatelessWidget {
   @override
