@@ -6,11 +6,13 @@ class ScoreBubble extends StatelessWidget {
     @required this.bgHeight,
     @required this.scoreContainerHeight,
     @required this.size,
+    @required this.score,
   }) : super(key: key);
 
   final double bgHeight;
   final double scoreContainerHeight;
   final Size size;
+  final int score;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class ScoreBubble extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '150',
+                            '$score',
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontSize: 36,

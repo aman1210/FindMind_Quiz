@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:findmind_task/provider/quizProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class Question extends StatelessWidget {
   const Question({
@@ -21,6 +23,9 @@ class Question extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<QuizProvider>(context);
+    var correct = provider.correct;
+    var wrong = provider.wrong;
     return Positioned(
       top: topWidgetHeight - 125,
       child: Container(
@@ -47,14 +52,14 @@ class Question extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 progressIndicator(
-                    progressNumber: 05,
-                    percent: 5 / 20,
+                    progressNumber: correct,
+                    percent: correct / 5,
                     color: Colors.green,
                     isCorrectProgess: true,
                     width: (s.width - 200) / 2),
                 progressIndicator(
-                    progressNumber: 07,
-                    percent: 7 / 20,
+                    progressNumber: wrong,
+                    percent: wrong / 5,
                     color: Colors.red,
                     isCorrectProgess: false,
                     width: (s.width - 200) / 2),
@@ -130,6 +135,7 @@ Row progressIndicator({
     width: width,
     lineHeight: 8,
     animation: true,
+    animateFromLastPercent: true,
   );
   return isCorrectProgess
       ? Row(

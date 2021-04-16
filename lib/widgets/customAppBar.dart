@@ -28,7 +28,9 @@ class CustomAppBar extends StatelessWidget {
               FontAwesomeIcons.arrowLeft,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
           if (isQuizScreen)
             IconButton(

@@ -4,8 +4,20 @@ import 'package:flutter/foundation.dart';
 
 class QuizProvider with ChangeNotifier {
   List<QuestionModel> questions = [];
+  int correct = 0;
+  int wrong = 0;
 
-  Future<void> loadProducts() async {
+  void increaseCorrect() {
+    correct += 1;
+    notifyListeners();
+  }
+
+  void increaseWrong() {
+    wrong += 1;
+    notifyListeners();
+  }
+
+  Future<List<QuestionModel>> loadProducts() async {
     final fireStore = FirebaseFirestore.instance;
     await fireStore
         .collection('Quiz')
@@ -29,6 +41,6 @@ class QuizProvider with ChangeNotifier {
         questions.add(newQuestion);
       });
     });
-    print(questions);
+    return questions;
   }
 }

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:findmind_task/model/questionModel.dart';
 import 'package:findmind_task/provider/quizProvider.dart';
+import 'package:findmind_task/screens/scoreScreen.dart';
 import 'package:findmind_task/widgets/question.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   List<QuestionModel> questions;
-  var index = -1;
+  var index = 0;
   bool isTimesUp = false;
   bool answerSelected = false;
   bool resetTimer = true;
@@ -42,18 +43,27 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void NextQuestion() {
-    setState(() {
-      index += 1;
-      correct = questions[index].correct;
-      controller.restart();
-      selected = -1;
-      isTimesUp = false;
-      answerSelected = false;
-      resetTimer = true;
-    });
+    index += 1;
+
+    if (index < questions.length) {
+      setState(() {
+        correct = questions[index].correct;
+        controller.restart();
+        selected = -1;
+        isTimesUp = false;
+        answerSelected = false;
+        resetTimer = true;
+      });
+    } else {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => ScoreScreen(),
+      ));
+    }
   }
 
-  loadFirstQuestion() {
+  loadFirstQuestion() async {
+    questions =
+        await Provider.of<QuizProvider>(context, listen: false).loadProducts();
     setState(() {
       index = 0;
       correct = questions[index].correct;
@@ -62,7 +72,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   void initState() {
-    questions = Provider.of<QuizProvider>(context, listen: false).questions;
     loadFirstQuestion();
     super.initState();
   }
@@ -80,53 +89,59 @@ class _QuizScreenState extends State<QuizScreen> {
       body: Container(
         height: s.height,
         width: s.width,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            BackGround(topWidgetHeight: topWidgetHeight, s: s, radius: radius),
-            CustomAppBar(
-              s: s,
-              isQuizScreen: true,
-            ),
-            Question(
-              question: questions[index].question,
-              number: index + 1,
-              totalquestion: questions.length,
-              topWidgetHeight: topWidgetHeight,
-              s: s,
-            ),
-            QuizTimer(topWidgetHeight, s, TimesUp, answerSelected, controller),
-            OptionContainer(
-              bottomWidgetHeight: bottomWidgetHeight,
-              s: s,
-              showAns: isTimesUp,
-              answerMarker: AnswerMarker,
-              selected: selected,
-              correct: correct,
-              options: questions[index].options,
-              isAnswerSelected: answerSelected,
-            ),
-            if (isTimesUp || answerSelected)
-              Positioned(
-                bottom: 15,
-                right: 15,
-                child: Align(
-                  child: Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.amber),
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_right,
-                          size: 30,
-                        ),
-                        onPressed: NextQuestion),
+        child: questions == null
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  BackGround(
+                      topWidgetHeight: topWidgetHeight, s: s, radius: radius),
+                  CustomAppBar(
+                    s: s,
+                    isQuizScreen: true,
                   ),
-                ),
+                  Question(
+                    question: questions[index].question,
+                    number: index + 1,
+                    totalquestion: questions.length,
+                    topWidgetHeight: topWidgetHeight,
+                    s: s,
+                  ),
+                  QuizTimer(
+                      topWidgetHeight, s, TimesUp, answerSelected, controller),
+                  OptionContainer(
+                    bottomWidgetHeight: bottomWidgetHeight,
+                    s: s,
+                    showAns: isTimesUp,
+                    answerMarker: AnswerMarker,
+                    selected: selected,
+                    correct: correct,
+                    options: questions[index].options,
+                    isAnswerSelected: answerSelected,
+                  ),
+                  if (isTimesUp || answerSelected)
+                    Positioned(
+                      bottom: 15,
+                      right: 15,
+                      child: Align(
+                        child: Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.amber),
+                          child: IconButton(
+                              icon: Icon(
+                                Icons.arrow_right,
+                                size: 30,
+                              ),
+                              onPressed: NextQuestion),
+                        ),
+                      ),
+                    ),
+                ],
               ),
-          ],
-        ),
       ),
     );
   }

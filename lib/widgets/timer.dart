@@ -40,9 +40,6 @@ class _QuizTimerState extends State<QuizTimer> {
         isReverseAnimation: true,
         isTimerTextShown: true,
         autoStart: true,
-        onStart: () {
-          print('Countdown Started');
-        },
         onComplete: () {
           widget.timesUp();
         },

@@ -36,19 +36,11 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               // return QuizScreen();
-              return Consumer<QuizProvider>(
-                builder: (context, value, child) {
-                  return FutureBuilder(
-                    future: value.loadProducts(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done)
-                        return QuizScreen();
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                  );
-                },
+
+              if (snapshot.connectionState == ConnectionState.done)
+                return QuizScreen();
+              return Center(
+                child: CircularProgressIndicator(),
               );
             }
             return Center(

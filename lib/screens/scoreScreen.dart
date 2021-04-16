@@ -9,6 +9,10 @@ import 'package:provider/provider.dart';
 class ScoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<QuizProvider>(context);
+    var correct = provider.correct;
+    var wrong = provider.wrong;
+    var score = correct * 10 - wrong * 5;
     final Size size = MediaQuery.of(context).size;
     final bgHeight = size.height * 0.55;
     final scoreContainerHeight = 180.0;
@@ -70,14 +74,14 @@ class ScoreScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 customTile("100%", "Completion", Colors.deepPurple),
-                customTile("20", "Total Question", Colors.blue)
+                customTile("${correct + wrong}", "Total Question", Colors.blue)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                customTile("13", "Correct", Colors.green),
-                customTile("07", "Wrong", Colors.red),
+                customTile("$correct", "Correct", Colors.green),
+                customTile("$wrong", "Wrong", Colors.red),
               ],
             )
           ],
@@ -95,7 +99,8 @@ class ScoreScreen extends StatelessWidget {
             ScoreBubble(
                 bgHeight: bgHeight,
                 scoreContainerHeight: scoreContainerHeight,
-                size: size),
+                size: size,
+                score: score),
             CustomAppBar(
               s: size,
               isQuizScreen: false,
@@ -106,12 +111,6 @@ class ScoreScreen extends StatelessWidget {
                 bgHeight: bgHeight,
                 scoreContainerHeight: scoreContainerHeight,
                 options: options),
-            IconButton(
-                icon: Icon(Icons.get_app),
-                onPressed: () {
-                  Provider.of<QuizProvider>(context, listen: false)
-                      .loadProducts();
-                }),
           ],
         ),
       ),
