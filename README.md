@@ -1,6 +1,6 @@
 # FindMind Quiz App
 
-A quiz app developed with flutter which is fetching questions from firebase.
+A quiz app developed with flutter.
 
 ## Screenshots
 
