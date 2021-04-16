@@ -63,7 +63,10 @@ class _QuizScreenState extends State<QuizScreen> {
           clipBehavior: Clip.none,
           children: [
             BackGround(topWidgetHeight: topWidgetHeight, s: s, radius: radius),
-            CustomAppBar(s: s),
+            CustomAppBar(
+              s: s,
+              isQuizScreen: true,
+            ),
             Question(
               topWidgetHeight: topWidgetHeight,
               s: s,

@@ -1,8 +1,10 @@
-import 'package:findmind_task/screens/quizScreen.dart';
-import 'package:findmind_task/screens/scoreScreen.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+
+import 'package:findmind_task/screens/quizScreen.dart';
+import 'package:findmind_task/screens/scoreScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

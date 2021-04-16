@@ -1,15 +1,13 @@
-import 'dart:async';
+import 'package:flutter/material.dart';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class QuizTimer extends StatefulWidget {
   final double topWidgetHeight;
   final Size s;
   final Function timesUp;
   final bool answerSelected;
-  CountDownController controller;
+  final CountDownController controller;
   QuizTimer(this.topWidgetHeight, this.s, this.timesUp, this.answerSelected,
       this.controller);
   @override

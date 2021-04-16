@@ -7,9 +7,11 @@ class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     Key key,
     @required this.s,
+    @required this.isQuizScreen,
   }) : super(key: key);
 
   final Size s;
+  final bool isQuizScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +30,17 @@ class CustomAppBar extends StatelessWidget {
             ),
             onPressed: () {},
           ),
-          IconButton(
-            icon: Transform.rotate(
-              angle: pi / 2,
-              child: Icon(
-                FontAwesomeIcons.slidersH,
-                color: Colors.white,
+          if (isQuizScreen)
+            IconButton(
+              icon: Transform.rotate(
+                angle: pi / 2,
+                child: Icon(
+                  FontAwesomeIcons.slidersH,
+                  color: Colors.white,
+                ),
               ),
+              onPressed: () {},
             ),
-            onPressed: () {},
-          ),
         ],
       ),
     );
