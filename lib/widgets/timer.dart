@@ -15,15 +15,13 @@ class QuizTimer extends StatefulWidget {
 }
 
 class _QuizTimerState extends State<QuizTimer> {
-  int val = 0;
-
   @override
   Widget build(BuildContext context) {
     return Positioned(
       top: widget.topWidgetHeight - 125 - 40,
       left: widget.s.width / 2 - 40,
       child: CircularCountDownTimer(
-        duration: 10,
+        duration: 20,
         initialDuration: 0,
         controller: widget.controller,
         width: 80,
@@ -49,22 +47,6 @@ class _QuizTimerState extends State<QuizTimer> {
           widget.timesUp();
         },
       ),
-      // child: Container(
-      //   height: 80,
-      //   width: 80,
-      //   padding: const EdgeInsets.all(4),
-      //   decoration:
-      //       BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-      //   child: CircularPercentIndicator(
-      //       radius: 72,
-      //       lineWidth: 5,
-      //       // animation: true,
-      //       percent: (30 - val) / 30,
-      //       circularStrokeCap: CircularStrokeCap.round,
-      //       backgroundColor: Colors.white,
-      //       progressColor: Theme.of(context).primaryColor,
-      //       center: Text('${30 - val}')),
-      // ),
     );
   }
 }

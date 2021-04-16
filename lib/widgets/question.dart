@@ -3,46 +3,29 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class Question extends StatefulWidget {
+class Question extends StatelessWidget {
   const Question({
     Key key,
     @required this.topWidgetHeight,
+    @required this.question,
+    @required this.number,
     @required this.s,
+    @required this.totalquestion,
   }) : super(key: key);
 
   final double topWidgetHeight;
-
+  final String question;
+  final int number;
   final Size s;
+  final int totalquestion;
 
-  @override
-  _QuestionState createState() => _QuestionState();
-}
-
-class _QuestionState extends State<Question> {
-  var questionNumber = 13;
-
-  var question = Expanded(
-    child: Center(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Text(
-          'How many students in your class __ from Korea?',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-    ),
-  );
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: widget.topWidgetHeight - 125,
+      top: topWidgetHeight - 125,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
-        width: widget.s.width - 2 * 20,
+        width: s.width - 2 * 20,
         padding: const EdgeInsets.all(16.0),
         height: 250,
         decoration: BoxDecoration(
@@ -68,13 +51,13 @@ class _QuestionState extends State<Question> {
                     percent: 5 / 20,
                     color: Colors.green,
                     isCorrectProgess: true,
-                    width: (widget.s.width - 200) / 2),
+                    width: (s.width - 200) / 2),
                 progressIndicator(
                     progressNumber: 07,
                     percent: 7 / 20,
                     color: Colors.red,
                     isCorrectProgess: false,
-                    width: (widget.s.width - 200) / 2),
+                    width: (s.width - 200) / 2),
               ],
             ),
             SizedBox(
@@ -91,7 +74,7 @@ class _QuestionState extends State<Question> {
                       fontSize: 16),
                 ),
                 Text(
-                  '13',
+                  '$number',
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold,
@@ -99,7 +82,7 @@ class _QuestionState extends State<Question> {
                       height: 0.9),
                 ),
                 Text(
-                  '/20',
+                  '/$totalquestion',
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold,
@@ -107,7 +90,21 @@ class _QuestionState extends State<Question> {
                 ),
               ],
             ),
-            question,
+            Expanded(
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Text(
+                    question,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

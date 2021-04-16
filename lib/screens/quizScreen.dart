@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:findmind_task/model/questionModel.dart';
+import 'package:findmind_task/provider/quizProvider.dart';
 import 'package:findmind_task/widgets/question.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,7 @@ import 'package:findmind_task/widgets/timer.dart';
 import 'package:findmind_task/widgets/background.dart';
 import 'package:findmind_task/widgets/customAppBar.dart';
 import 'package:findmind_task/widgets/optionsContainer.dart';
+import 'package:provider/provider.dart';
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -15,11 +18,13 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  List<QuestionModel> questions;
+  var index = -1;
   bool isTimesUp = false;
   bool answerSelected = false;
   bool resetTimer = true;
   int selected = -1;
-  int correct = 3;
+  String correct;
   CountDownController controller = CountDownController();
 
   void TimesUp() {
@@ -38,12 +43,28 @@ class _QuizScreenState extends State<QuizScreen> {
 
   void NextQuestion() {
     setState(() {
+      index += 1;
+      correct = questions[index].correct;
       controller.restart();
       selected = -1;
       isTimesUp = false;
       answerSelected = false;
       resetTimer = true;
     });
+  }
+
+  loadFirstQuestion() {
+    setState(() {
+      index = 0;
+      correct = questions[index].correct;
+    });
+  }
+
+  @override
+  void initState() {
+    questions = Provider.of<QuizProvider>(context, listen: false).questions;
+    loadFirstQuestion();
+    super.initState();
   }
 
   @override
@@ -68,6 +89,9 @@ class _QuizScreenState extends State<QuizScreen> {
               isQuizScreen: true,
             ),
             Question(
+              question: questions[index].question,
+              number: index + 1,
+              totalquestion: questions.length,
               topWidgetHeight: topWidgetHeight,
               s: s,
             ),
@@ -79,6 +103,7 @@ class _QuizScreenState extends State<QuizScreen> {
               answerMarker: AnswerMarker,
               selected: selected,
               correct: correct,
+              options: questions[index].options,
               isAnswerSelected: answerSelected,
             ),
             if (isTimesUp || answerSelected)

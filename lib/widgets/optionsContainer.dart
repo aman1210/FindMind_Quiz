@@ -6,11 +6,12 @@ class OptionContainer extends StatelessWidget {
     Key key,
     @required this.bottomWidgetHeight,
     @required this.s,
-    this.showAns,
-    this.answerMarker,
-    this.selected,
-    this.correct,
-    this.isAnswerSelected,
+    @required this.showAns,
+    @required this.answerMarker,
+    @required this.selected,
+    @required this.correct,
+    @required this.isAnswerSelected,
+    @required this.options,
   }) : super(key: key);
 
   final double bottomWidgetHeight;
@@ -18,8 +19,9 @@ class OptionContainer extends StatelessWidget {
   final bool showAns;
   final Function answerMarker;
   final int selected;
-  final int correct;
+  final String correct;
   final bool isAnswerSelected;
+  final List<String> options;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,8 @@ class OptionContainer extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                      color: index == correct && (selected != -1 || showAns)
+                      color: options[index] == correct &&
+                              (selected != -1 || showAns)
                           ? Colors.green
                           : index == selected
                               ? Colors.red
@@ -47,24 +50,25 @@ class OptionContainer extends StatelessWidget {
                       width: 2),
                 ),
                 child: ListTile(
-                    title: Text('Option $index'),
-                    trailing: index == correct && (selected != -1 || showAns)
-                        ? Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          )
-                        : index == selected
+                    title: Text(options[index]),
+                    trailing:
+                        options[index] == correct && (selected != -1 || showAns)
                             ? Icon(
-                                FontAwesomeIcons.solidTimesCircle,
-                                color: Colors.red,
+                                Icons.check_circle,
+                                color: Colors.green,
                               )
-                            : Icon(FontAwesomeIcons.circle),
+                            : index == selected
+                                ? Icon(
+                                    FontAwesomeIcons.solidTimesCircle,
+                                    color: Colors.red,
+                                  )
+                                : Icon(FontAwesomeIcons.circle),
                     onTap: () {
                       if (!isAnswerSelected) answerMarker(index);
                     }),
               );
             },
-            itemCount: 4,
+            itemCount: options.length,
           ),
         ),
       ),
